@@ -9,7 +9,7 @@ const MOVE_EVENTS = ['touchmove', 'mousemove']
 const END_EVENTS = ['touchend', 'touchcancel', 'mouseup', 'mouseleave']
 const MOUSE_EVENTS = ['mousedown', 'mousemove', 'mouseup', 'mouseleave']
 
-export default function(Glide, Components, Events) {
+export default function (Glide, Components, Events) {
   /**
    * Instance of the binder for DOM Events.
    *
@@ -30,7 +30,7 @@ export default function(Glide, Components, Events) {
      *
      * @return {Void}
      */
-    mount() {
+    mount () {
       this.bindSwipeStart()
     },
 
@@ -40,7 +40,7 @@ export default function(Glide, Components, Events) {
      * @param {Object} event
      * @return {Void}
      */
-    start(event) {
+    start (event) {
       if (!disabled && !Glide.disabled) {
         this.disable()
 
@@ -62,7 +62,7 @@ export default function(Glide, Components, Events) {
      *
      * @return {Void}
      */
-    preventDefaultMove(event) {
+    preventDefaultMove (event) {
       if (event.cancelable) {
         event.preventDefault()
       }
@@ -73,7 +73,7 @@ export default function(Glide, Components, Events) {
      *
      * @param {Object} event
      */
-    move(event) {
+    move (event) {
       if (!Glide.disabled) {
         let { touchAngle, touchRatio, classes } = Glide.settings
 
@@ -108,7 +108,7 @@ export default function(Glide, Components, Events) {
      * @param {Object} event
      * @return {Void}
      */
-    end(event) {
+    end (event) {
       if (!Glide.disabled) {
         let settings = Glide.settings
 
@@ -147,7 +147,7 @@ export default function(Glide, Components, Events) {
      *
      * @return {Void}
      */
-    bindSwipeStart() {
+    bindSwipeStart () {
       let settings = Glide.settings
 
       if (settings.swipeThreshold) {
@@ -169,7 +169,7 @@ export default function(Glide, Components, Events) {
      *
      * @return {Void}
      */
-    unbindSwipeStart() {
+    unbindSwipeStart () {
       Binder.off(START_EVENTS[0], Components.Html.wrapper, preventDefaultsOptions)
       Binder.off(START_EVENTS, Components.Html.wrapper, capture)
     },
@@ -179,7 +179,7 @@ export default function(Glide, Components, Events) {
      *
      * @return {Void}
      */
-    bindSwipeMove() {
+    bindSwipeMove () {
       Binder.on(MOVE_EVENTS[0], Components.Html.wrapper, this.preventDefaultMove, preventDefaultsOptions)
       Binder.on(MOVE_EVENTS, Components.Html.wrapper, throttle((event) => {
         this.move(event)
@@ -191,7 +191,7 @@ export default function(Glide, Components, Events) {
      *
      * @return {Void}
      */
-    unbindSwipeMove() {
+    unbindSwipeMove () {
       Binder.off(MOVE_EVENTS[0], Components.Html.wrapper, preventDefaultsOptions)
       Binder.off(MOVE_EVENTS, Components.Html.wrapper, capture)
     },
@@ -201,7 +201,7 @@ export default function(Glide, Components, Events) {
      *
      * @return {Void}
      */
-    bindSwipeEnd() {
+    bindSwipeEnd () {
       Binder.on(END_EVENTS[0], Components.Html.wrapper, this.preventDefaultMove, preventDefaultsOptions)
       Binder.on(END_EVENTS, Components.Html.wrapper, (event) => {
         this.end(event)
@@ -213,7 +213,7 @@ export default function(Glide, Components, Events) {
      *
      * @return {Void}
      */
-    unbindSwipeEnd() {
+    unbindSwipeEnd () {
       Binder.off(END_EVENTS[0], Components.Html.wrapper, preventDefaultsOptions)
       Binder.off(END_EVENTS, Components.Html.wrapper)
     },
@@ -223,7 +223,7 @@ export default function(Glide, Components, Events) {
      *
      * @param {Object} event
      */
-    touches(event) {
+    touches (event) {
       if (MOUSE_EVENTS.indexOf(event.type) > -1) {
         return event
       }
@@ -236,7 +236,7 @@ export default function(Glide, Components, Events) {
      *
      * @return {Number}
      */
-    threshold(event) {
+    threshold (event) {
       let settings = Glide.settings
 
       if (MOUSE_EVENTS.indexOf(event.type) > -1) {
@@ -251,7 +251,7 @@ export default function(Glide, Components, Events) {
      *
      * @return {self}
      */
-    enable() {
+    enable () {
       disabled = false
 
       Components.Transition.enable()
@@ -264,7 +264,7 @@ export default function(Glide, Components, Events) {
      *
      * @return {self}
      */
-    disable() {
+    disable () {
       disabled = true
 
       Components.Transition.disable()
